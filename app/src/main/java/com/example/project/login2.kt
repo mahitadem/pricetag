@@ -13,63 +13,42 @@ import com.google.firebase.ktx.Firebase
 
 class login2 : AppCompatActivity() {
     lateinit var log2: Button
-    lateinit var name: EditText
-    lateinit var email: EditText
-    lateinit var pass: EditText
-    lateinit var btn: Button
+    lateinit var nam:EditText
+    lateinit var pas:EditText
+    lateinit var mail:EditText
     lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login2)
         log2 = findViewById(R.id.login)
 
-        log2.setOnClickListener {
-            val intent = Intent(this, cities::class.java)
-            startActivity(intent)
-            name = findViewById(R.id.editTextText)
-            email = findViewById(R.id.mail2)
-            pass = findViewById(R.id.pass)
-            btn = findViewById(R.id.login)
-            auth = Firebase.auth
+        nam = findViewById(R.id.editTextText)
+        pas = findViewById(R.id.pass)
+        mail = findViewById(R.id.mail2)
+        auth = FirebaseAuth.getInstance()
 
 
-            name.setOnClickListener {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-            }
-            btn.setOnClickListener {
-                loginactivity()
-
-            }
-            fun loginactivity() {
-                val email = email.text.toString()
-                val pass = pass.text.toString()
-//                val conf = con.text.toString()
-
-                if (email.isBlank() || pass.isBlank()) {
-                    Toast.makeText(this, "Password and email can't be blank", Toast.LENGTH_LONG)
-                        .show()
-                    return
-
-//                } else if (pass != conf) {
-//                    Toast.makeText(this, "Password does not match", Toast.LENGTH_LONG).show()}
+//        log2.setOnClickListener {
+//            val intent = Intent(this, cities::class.java)
+//            startActivity(intent)
 //
-                }
-                auth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(this) {
+//        }
 
-                    if (it.isSuccessful) {
-                        Toast.makeText(this, "Signed up successfully", Toast.LENGTH_LONG).show()
-                        finish()
-
-
-                    } else {
-                        Toast.makeText(this, "Fail to create user", Toast.LENGTH_LONG).show()
-                    }
-
-                }
-
-            }
-
+        log2.setOnClickListener {
+            loginuser()
         }
     }
-}
+
+        private fun loginuser () {
+            val email = mail.toString()
+            val pass = pas.toString()
+            auth.signInWithEmailAndPassword(email,pass).addOnCompleteListener(this){
+                if(it.isSuccessful){
+                    Toast.makeText(this,"Successfully signed in",Toast.LENGTH_LONG).show()
+                    finish()
+                }else{
+                    Toast.makeText(this,"Sign in failed",Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
