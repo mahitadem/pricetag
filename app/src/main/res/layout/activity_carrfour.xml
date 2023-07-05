@@ -7,9 +7,9 @@
     tools:context=".carrfour">
 
     <WebView
-        android:id="@+id/web2"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:id="@+id/carrfour"
+        android:layout_width="377dp"
+        android:layout_height="711dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

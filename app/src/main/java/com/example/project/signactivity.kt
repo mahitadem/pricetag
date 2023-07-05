@@ -40,19 +40,20 @@ class signactivity : AppCompatActivity() {
     }
 
         private fun signuser() {
-        val mail = em.toString()
-        val password = pas.toString()
+            val confirm=con.toString()
+            val mail = em.toString()
+            val password = pas.toString()
 
-        if (mail.isBlank() || password.isBlank()) {
+            if (mail.isBlank() || password.isBlank()|| confirm.isBlank()) {
             Toast.makeText(this, "Password and Email can't be blank", Toast.LENGTH_LONG).show()
             return
-        } else if (pas!=con){
+        } else if (pas != con){
             Toast.makeText(this,"Password does not match",Toast.LENGTH_LONG).show()
         }
             auth.createUserWithEmailAndPassword(mail,password).addOnCompleteListener(this){
                 if(it.isSuccessful){
                     Toast.makeText(this,"Signed up successfully",Toast.LENGTH_LONG).show()
-                    finish()
+//                    finish()
                 }else {
                     Toast.makeText(this,"Fail to create user",Toast.LENGTH_LONG).show()
                 }
